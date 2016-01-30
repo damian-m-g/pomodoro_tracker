@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'rake'
+gem 'rdoc'
+gem 'bundler'
+gem 'fxruby'
+gem 'rubyserial'
+gem 'fastimage'
+gem 'win32-clipboard'
+gem 'win32-mutex'
