@@ -38,6 +38,8 @@ class PomodoroTracker
           @serial_port_number = 'COM3'
         end
       end
+    else
+      @serial_port_number = 'COM3'
     end
     # initialize the brain
     @pomodoro_system = PomodoroSystem.new((@persisted_data[0] rescue nil), self)
