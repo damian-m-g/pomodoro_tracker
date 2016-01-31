@@ -7,7 +7,7 @@ class PomodoroTracker
   PERSISTED_DATA_FILENAME = 'pd.pt'
   VERSION = '1.0'
   BUG_REPORTS_AND_FEATURES_REQUEST_URI = 'https://github.com/IgorJorobus/pomodoro_tracker/issues'
-  DONATIONS_URI = '-'
+  DONATIONS_URI = 'http://jorobuslab.net/main/en/pomodoro_tracker.html'
   JOROBUSLAB_WEBSITE = 'http://jorobuslab.net'
 
   # *dropbox_present* is #TrueClass or #FalseClass
