@@ -1,7 +1,7 @@
 # An instance of this class is a gamification system, compromise/reward style.
 class Gamification
 
-  attr_reader :gold, :rewards_created
+  attr_accessor :gold, :rewards_created
 
   # @param persisted_data [Array], @param pomodoro_tracker [PomodoroTracker].
   def initialize(persisted_data, pomodoro_tracker)

@@ -4,7 +4,7 @@ class PomodoroSystem
   # *current_project* is a #String or #NilClass. On each hash the projects are saved as symbols.
   # there is no need to persist the @current_pomodoro
   # last break remains on RAM, even if isn't running
-  attr_reader :pomodoros_finished, :pomodoros_stopped, :breaks_completed, :breaks_stopped, :consecutive_pomodoros, :stop_time_rate_of_pomodoros, :all_pomodoros, :current_project, :current_pomodoro, :current_break, :pomodoro_tracker
+  attr_accessor :pomodoros_finished, :pomodoros_stopped, :breaks_completed, :breaks_stopped, :consecutive_pomodoros, :stop_time_rate_of_pomodoros, :all_pomodoros, :current_project, :current_pomodoro, :current_break, :pomodoro_tracker
 
   # @param persisted_data [Array or NilClass], @param pomodoro_tracker [PomodoroTracker].
   def initialize(persisted_data, pomodoro_tracker)

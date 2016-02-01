@@ -1,6 +1,6 @@
 class Pomodoro
 
-  attr_reader :consecutive, :current_counting, :stop_time, :start_time, :proyect, :finished_time
+  attr_accessor :consecutive, :current_counting, :stop_time, :start_time, :proyect, :finished_time
 
   # @param pomodoro_system [PomodoroSystem], @param proyect [String], @param consecutive [TrueClass or FalseClass].
   def initialize(pomodoro_system, proyect, consecutive)

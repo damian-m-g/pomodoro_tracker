@@ -48,6 +48,38 @@ class PomodoroTracker
     # see if the pomodoro tracker hardware is on
     @arduino_interpreter = ArduinoInterpreter.new()
     @arduino_connected = @arduino_interpreter.arduino_present?(@serial_port_number) #: TrueClass or FalseClass
+
+    # TODO: Next only for showcase purpose
+    # general information
+    @pomodoro_system.pomodoros_finished = {global: 164, working_day: 9, :'HospitalRun' => 339, :'Shouhin Bonsai' => 1315, :'libgdx' => 417, :'sentry' => 196, :'tensorflow' => 133}
+    @pomodoro_system.pomodoros_stopped = {global: 25, working_day: 1, :'HospitalRun' => 59, :'Shouhin Bonsai' => 314, :'libgdx' => 69, :'sentry' => 21, :'tensorflow' => 17}
+    @pomodoro_system.breaks_completed = {global: 133, working_day: 7, :'HospitalRun' => 284, :'Shouhin Bonsai' => 1115, :'libgdx' => 355, :'sentry' => 180, :'tensorflow' => 54}
+    @pomodoro_system.breaks_stopped = {global: 31, working_day: 2, :'HospitalRun' => 55, :'Shouhin Bonsai' => 200, :'libgdx' => 62, :'sentry' => 16, :'tensorflow' => 79}
+    @pomodoro_system.consecutive_pomodoros = {global: 106, working_day: 8, :'HospitalRun' => 257, :'Shouhin Bonsai' => 601, :'libgdx' => 265, :'sentry' => 172, :'tensorflow' => 106}
+    @pomodoro_system.stop_time_rate_of_pomodoros = {global: 13.2, working_day: 5.3, :'HospitalRun' => 14.1, :'Shouhin Bonsai' => 7.5, :'libgdx' => 0, :'sentry' => 21.3, :'tensorflow' => 8.1}
+    # specific information
+    @pomodoro_system.all_pomodoros = {global: [], working_day: [], :'HospitalRun' => [], :'Shouhin Bonsai' => [], :'libgdx' => [], :'sentry' => [], :'tensorflow' => []}
+    [[:working_day, 9, 8, 1], [:'HospitalRun', 339, 257, 59], [:'Shouhin Bonsai', 1315, 601, 314], [:'libgdx', 417, 265, 69], [:'sentry', 196, 172, 21], [:'tensorflow', 133, 106, 17]].each do |i, a, cp, ps|
+      cp_counter = 0
+      a.times do
+        p = Pomodoro.new(@pomodoro_system, i.to_s, (cp_counter < cp ? cp_counter += 1 : false))
+        p.current_counting = 1500
+        p.start_time = Time.now() - rand(2000..7257600)
+        p.finished_time = p.start_time + 1500
+        @pomodoro_system.all_pomodoros[i] << p
+      end
+      ps.times do
+        p = Pomodoro.new(@pomodoro_system, i.to_s, false)
+        p.current_counting = 1200
+        p.start_time = Time.now() - rand(2000..7257600)
+        p.stop_time = p.start_time + 1200
+        @pomodoro_system.all_pomodoros[i] << p
+      end
+    end
+    @pomodoro_system.current_project = 'Shouhin Bonsai'
+    @gamification.gold = 132
+    # TODO: Previous only for showcase purpose
+
     # start main loop
     FXGUI.new((@persisted_data[2] rescue nil), self)
   end
