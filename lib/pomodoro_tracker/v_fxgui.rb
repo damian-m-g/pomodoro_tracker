@@ -1216,6 +1216,7 @@ class FXGUI
         amount = data[1] #: Fixnum
         graphic_bar_number = last_12_weeks.reverse.find_index(data[0]) #: Fixnum
         @graphic_bars[graphic_bar_number].height = (amount * _factor).floor #: Fixnum
+        @graphic_bars[graphic_bar_number].update()
       end
     else
       # clean everything, no data to show, place default values
