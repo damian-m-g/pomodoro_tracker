@@ -1,3 +1,4 @@
+# Colors storage.
 module FXColor
 
   ROJO = FXRGB(173, 133, 139)

@@ -1,0 +1,8 @@
+ProgrammerNotes.md
+Gemfile.lock
+test/
+doc/
+data/*.dll
+data/*.h
+data/*.lib
+.idea/

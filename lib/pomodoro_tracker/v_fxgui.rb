@@ -1,7 +1,8 @@
 # Graphic User Interface.
 class FXGUI
 
-  # @param persisted_data [Array or NilClass], @param pomodoro_tracker [PomodoroTracker].
+  # @param persisted_data [Array, NilClass]
+  # @param pomodoro_tracker [PomodoroTracker]
   def initialize(persisted_data, pomodoro_tracker)
     $fxgui = self
     if(persisted_data) then load_persisted_data(persisted_data) end
@@ -26,7 +27,8 @@ class FXGUI
 
   private
 
-  # @param persisted_data [Array]. If there's some persisted data, load it into self.
+  # @param persisted_data [Array]
+  # If there's some persisted data, load it into self.
   def load_persisted_data(persisted_data)
     @current_item_selected_on_listbox_general_chart = persisted_data[0]
     @current_selected_project_on_statistics = persisted_data[1]
@@ -34,7 +36,6 @@ class FXGUI
   end
 
   def create_window
-    # by now icons are nil
     @icon = FXPNGIcon.new(@app, File.read('./data/icon.png', {mode: 'rb'}), 0, 0, 30, 30)
     @main_window = FXMainWindow.new(@app, 'Pomodoro Tracker', icon: @icon, miniIcon: @miniIcon, height: 710, width: 540, opts: DECOR_TITLE|DECOR_MINIMIZE|DECOR_CLOSE|DECOR_BORDER)
     vertical0 = FXVerticalFrame.new(@main_window, opts: LAYOUT_FILL)
@@ -279,7 +280,9 @@ class FXGUI
     end
   end
 
-  # @param seconds [Fixnum]. @return [String]. Transform raw seconds into a pretty print for showing time on seven segment.
+  # @param seconds [Fixnum]
+  # @return [String]
+  # Transform raw seconds into a pretty print for showing time on seven segment.
   def transform_seconds_to_pretty_timeshow(seconds)
     pretty = ''
     minutes_part = seconds / 60
@@ -529,7 +532,7 @@ class FXGUI
     if(cpi != -1) then listbox.currentItem = cpi end
   end
 
-  # @param project [String].
+  # @param project [String]
   def new_project_selected(project)
     # modify stuff in the model
     @pomodoro_system.change_current_project(project)
@@ -814,7 +817,9 @@ class FXGUI
     dialog.execute(PLACEMENT_OWNER)
   end
 
-  # @param button [FXButton], @param actual_reward [Reward or NilClass]. @return [String or NilClass].
+  # @param button [FXButton]
+  # @param actual_reward [Reward or NilClass]
+  # @return [String or NilClass]
   def button_path_to_icon_pressed(button, actual_reward = nil)
     filepath = FXFileDialog.getOpenFilename(@main_window, 'Select JPG of size 100 x 100', nil, 'JPG files (*.jpg)').gsub('\\', '/') #: String
     if(filepath != '')
@@ -834,7 +839,16 @@ class FXGUI
     end
   end
 
-  # @param short_description_widget [FXTextField], @param long_description_widget [FXTextField], @param cost_widget [FXTextField], @param available_widget [FXCheckButton], @param button_path_to_icon [FXButton], @param dialog [FXDialogBox], @param rewards_packer [FXVerticalFrame], @param actual_reward [NilClass or Reward], @param updating_procedure [Proc]. This creates a new reward only validating some data. The must are the short description and the cost.
+  # @param short_description_widget [FXTextField]
+  # @param long_description_widget [FXTextField]
+  # @param cost_widget [FXTextField]
+  # @param available_widget [FXCheckButton]
+  # @param button_path_to_icon [FXButton]
+  # @param dialog [FXDialogBox]
+  # @param rewards_packer [FXVerticalFrame]
+  # @param actual_reward [NilClass, Reward]
+  # @param updating_procedure [Proc]
+  # This creates a new reward only validating some data. The must are the short description and the cost.
   def button_new_reward_accepted_pressed(short_description_widget, long_description_widget, cost_widget, available_widget, button_path_to_icon, dialog, rewards_packer, actual_reward = nil, updating_procedure = nil)
     # check for short description first
     if((short_description_widget.text.strip == '') || (cost_widget.text.strip == ''))
