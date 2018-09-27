@@ -2,7 +2,9 @@ class Pomodoro
 
   attr_accessor :consecutive, :current_counting, :stop_time, :start_time, :proyect, :finished_time
 
-  # @param pomodoro_system [PomodoroSystem], @param proyect [String], @param consecutive [TrueClass or FalseClass].
+  # @param pomodoro_system [PomodoroSystem]
+  # @param proyect [String]
+  # @param consecutive [TrueClass, FalseClass].
   def initialize(pomodoro_system, proyect, consecutive)
     # measured in seconds
     @start_time = Time.now
@@ -12,7 +14,8 @@ class Pomodoro
     @consecutive = consecutive #: FalseClass or TrueClass
   end
 
-  # @return [TrueClass or FalseClass]. Changes value of *@current_counting* but it also checks for overdue time. Returns true if pomodoro has finished.
+  # @return [TrueClass, FalseClass]
+  # Changes value of *@current_counting* but it also checks for overdue time. Returns true if pomodoro has finished.
   def increase_counter()
     @current_counting = (Time.now - @start_time).floor
     if(@current_counting >= 1500)

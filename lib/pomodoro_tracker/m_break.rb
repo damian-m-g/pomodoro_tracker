@@ -2,7 +2,8 @@ class Break
 
   attr_reader :start_time, :long, :current_counting
 
-  # @param pomodoro_system [PomodoroSystem], @param long [TrueClass or FalseClass].
+  # @param pomodoro_system [PomodoroSystem]
+  # @param long [TrueClass, FalseClass]
   def initialize(pomodoro_system, long = false)
     @long = long
     # note the delay, that is to synchronize well with the GUI
@@ -11,7 +12,8 @@ class Break
     @pomodoro_system = pomodoro_system
   end
 
-  # @return [TrueClass or FalseClass]. Changes value of *@current_counting* but it also checks for overdue time. Returns true if break has finished.
+  # @return [TrueClass, FalseClass]
+  # Changes value of *@current_counting* but it also checks for overdue time. Returns true if break has finished.
   def increase_counter
     @current_counting = (Time.now - @start_time).floor
     if(@long)
@@ -48,7 +50,8 @@ class Break
     @stop_time = Time.now
   end
 
-  # @return [TrueClass or FalseClass]. Has this break finished?
+  # @return [TrueClass, FalseClass]
+  # Has this break finished?
   def finished?
     if(@finished_time)
       true

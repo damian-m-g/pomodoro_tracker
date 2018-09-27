@@ -49,7 +49,8 @@ class PomodoroTracker
     @arduino_interpreter = ArduinoInterpreter.new()
     @arduino_connected = @arduino_interpreter.arduino_present?(@serial_port_number) #: TrueClass or FalseClass
 
-    # TODO: Next only for showcase purpose
+=begin
+    # ATTENTION: Next only for showcase purpose
     # general information
     @pomodoro_system.pomodoros_finished = {global: 164, working_day: 9, :'HospitalRun' => 339, :'Shouhin Bonsai' => 1315, :'libgdx' => 417, :'sentry' => 196, :'tensorflow' => 133}
     @pomodoro_system.pomodoros_stopped = {global: 25, working_day: 1, :'HospitalRun' => 59, :'Shouhin Bonsai' => 314, :'libgdx' => 69, :'sentry' => 21, :'tensorflow' => 17}
@@ -78,13 +79,15 @@ class PomodoroTracker
     end
     @pomodoro_system.current_project = 'Shouhin Bonsai'
     @gamification.gold = 132
-    # TODO: Previous only for showcase purpose
+    # ATTENTION: Previous only for showcase purpose
+=end
 
     # start main loop
     FXGUI.new((@persisted_data[2] rescue nil), self)
   end
 
-  # @return [TrueClass or FalseClass]. Persist important data on cloud if can, if not it does on local machine ProgramData folder. Returns true or false depending on if could have been saved or not.
+  # @return [TrueClass, FalseClass]
+  # Persist important data on cloud if can, if not it does on local machine ProgramData folder. Returns true or false depending on if could have been saved or not.
   def persist_data
     # ask the @pomodoro_system for the package of data to persist
     package_0 = @pomodoro_system.build_package_to_persist()
@@ -109,7 +112,8 @@ class PomodoroTracker
     false
   end
 
-  # @param serial_port [String or NilClass]. This method and the button in GUI which trigger it could get deprecated soon.
+  # @param serial_port [String, NilClass]
+  # This method and the button in GUI which trigger it could get deprecated soon.
   def synchronize_with_dropbox(serial_port = nil)
     persist_data()
     # refresh arduino status
@@ -124,7 +128,8 @@ class PomodoroTracker
 
   private
 
-  # @return [NilClass or Array]. Try to find the persisted data file and load its content. Returns nil if there is no persisted data, otherway returns the data obtained.
+  # @return [NilClass, Array]
+  # Try to find the persisted data file and load its content. Returns nil if there is no persisted data, otherway returns the data obtained.
   def try_load_persisted_data
     # check if the folder exists
     if(File.exists?(DROPBOX_PATH))
@@ -138,7 +143,8 @@ class PomodoroTracker
     end
   end
 
-  # @return [NilClass or Array]. Try to load from DropBox, if can't then pass responsability to ProgramData folder.
+  # @return [NilClass, Array]
+  # Try to load from DropBox, if can't then pass responsability to ProgramData folder.
   def try_load_from_dropbox
     # see if any data is persisted there
     if(File.exists?(dbpd = "#{DROPBOX_PATH}/#{PERSISTED_DATA_FILENAME}"))
@@ -160,7 +166,8 @@ class PomodoroTracker
     end
   end
 
-  # @return [NilClass or Array]. Try to load data from ProgramData directory.
+  # @return [NilClass, Array]
+  # Try to load data from ProgramData directory.
   def try_load_from_program_data
     if(File.exists?(pdpd = "#{PROGRAM_DATA_PT_PATH}/#{PERSISTED_DATA_FILENAME}"))
       # try the load

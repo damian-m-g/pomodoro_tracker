@@ -1,3 +1,6 @@
+### CODED BY DAMIAN M. GONZALEZ ###
+
+# external libraries
 require 'fox16'
 include Fox
 require 'rubyserial'
@@ -6,6 +9,7 @@ require 'date'
 require 'win32/clipboard'
 require 'win32/mutex'
 
+# source code
 require_relative './pomodoro_tracker/v_fxgui'
 require_relative './pomodoro_tracker/v_fxcolor'
 require_relative './pomodoro_tracker/v_fxpainter'
@@ -18,6 +22,7 @@ require_relative './pomodoro_tracker/m_gamification'
 require_relative './pomodoro_tracker/m_reward'
 require_relative '../ext/autoit-ffi'
 
+# prevent ocra to execute the app when compiling
 if(defined?(Ocra))
   exit()
 else

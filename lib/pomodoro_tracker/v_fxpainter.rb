@@ -5,14 +5,18 @@ class FXPainter
   RATE_SHADOW_COLOR = 66.6
   RATE_BORDER_COLOR = 41.6
 
-  # @param color [FXColor], @param widgets [FXWindow].
+  # @param color [FXColor]
+  # @param widgets [FXWindow]
   def self.paint_background(color, *widgets)
     widgets.each do |w|
       w.backColor = color
     end
   end
 
-  # @param red [Fixnum], @param green [Fixnum], @param blue [Fixnum], @param buttons [FXButton].
+  # @param red [Fixnum]
+  # @param green [Fixnum]
+  # @param blue [Fixnum]
+  # @param buttons [FXButton]
   def self.paint_buttons(red, green, blue, *buttons)
     buttons.each do |b|
       b.hiliteColor = FXRGB(validate_rgb_value(red, 15), validate_rgb_value(green, 15), validate_rgb_value(blue, 15))
@@ -23,7 +27,8 @@ class FXPainter
     end
   end
 
-  # @param color [FXColor], @param widgets [FXWindow].
+  # @param color [FXColor]
+  # @param widgets [FXWindow]
   def self.paint_borders(color, *widgets)
     widgets.each do |w|
       w.borderColor = color
@@ -32,7 +37,10 @@ class FXPainter
 
   private
 
-  # @param pristine [Fixnum], @param add [Fixnum]. @return [Fixnum]. A RGB value must be between 0 and 255. This adds *add* to the pristine returning a valid rgb value, limitating the result if needed.
+  # @param pristine [Fixnum]
+  # @param add [Fixnum]
+  # @return [Fixnum]
+  # A RGB value must be between 0 and 255. This adds *add* to the pristine returning a valid rgb value, limitating the result if needed.
   def self.validate_rgb_value(pristine, add)
     _result = pristine + add #: Fixnum
     if(_result < 0)

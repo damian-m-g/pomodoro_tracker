@@ -3,7 +3,9 @@ class ArduinoInterpreter
 
   attr_reader :sp
 
-  # @param serial_port [String]. @return [TrueClass or FalseClass]. Try to synchronize with Arduino.
+  # @param serial_port [String]
+  # @return [TrueClass, FalseClass]
+  # Try to synchronize with Arduino.
   def arduino_present?(serial_port)
     puts("Seeking #{serial_port} opened...")
     @sp = Serial.new(serial_port)
@@ -60,7 +62,10 @@ class ArduinoInterpreter
   STATES
 =end
 
-  # @param state [Symbol], @param pomodoros_finished [Fixnum], @param current_counting [Fixnum]. *state* is one of :running, :break or :stopped.
+  # @param state [Symbol]
+  # @param pomodoros_finished [Fixnum]
+  # @param current_counting [Fixnum]
+  # *state* is one of :running, :break or :stopped.
   def transmit_status(state, pomodoros_finished = 0, current_counting = 0)
     # be sure that *pomodoros_finished* isn't bigger than 99
     if(pomodoros_finished > 99)

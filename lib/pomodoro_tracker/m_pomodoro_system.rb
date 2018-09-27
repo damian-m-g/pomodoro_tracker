@@ -6,7 +6,8 @@ class PomodoroSystem
   # last break remains on RAM, even if isn't running
   attr_accessor :pomodoros_finished, :pomodoros_stopped, :breaks_completed, :breaks_stopped, :consecutive_pomodoros, :stop_time_rate_of_pomodoros, :all_pomodoros, :current_project, :current_pomodoro, :current_break, :pomodoro_tracker
 
-  # @param persisted_data [Array or NilClass], @param pomodoro_tracker [PomodoroTracker].
+  # @param persisted_data [Array, NilClass]
+  # @param pomodoro_tracker [PomodoroTracker]
   def initialize(persisted_data, pomodoro_tracker)
     @pomodoro_tracker = pomodoro_tracker
     if(persisted_data)
@@ -25,7 +26,7 @@ class PomodoroSystem
     @all_pomodoros[:working_day] = []
   end
 
-  # @return [Array].
+  # @return [Array]
   def build_package_to_persist
     package = []
     [@pomodoros_finished, @pomodoros_stopped, @breaks_completed, @breaks_stopped, @consecutive_pomodoros, @stop_time_rate_of_pomodoros, @all_pomodoros, @current_project].each do |data|
@@ -127,12 +128,13 @@ class PomodoroSystem
     @breaks_stopped[:working_day] += 1
   end
 
-  # @param name [String or Symbol]. @return [TrueClass or FalseClass].
+  # @param name [String, Symbol]
+  # @return [TrueClass or FalseClass]
   def exists_project?(name)
     @all_pomodoros.has_key?(name.to_sym)
   end
 
-  # @param name [String].
+  # @param name [String]
   def add_new_project(name)
     name_as_sym = name.to_sym
     @pomodoros_finished[name_as_sym] = 0
@@ -146,7 +148,7 @@ class PomodoroSystem
     if(!@current_project) then @current_project = name end
   end
 
-  # @param name [String or Symbol].
+  # @param name [String, Symbol]
   def delete_project(name = @current_project)
     name_as_sym = name.to_sym
     # erase all track of that project
@@ -167,12 +169,12 @@ class PomodoroSystem
     if(_current_project) then @current_project = _current_project.to_s else @current_project = nil end
   end
 
-  # @param project [String or Symbol].
+  # @param project [String, Symbol]
   def change_current_project(project)
     @current_project = project.to_s
   end
 
-  # @return [Array].
+  # @return [Array]
   def show_me_greater_amount_of_pomodoros_completed_on_last_7_days
     unsorted_summary = []
     @all_pomodoros.each_pair do |project, pomodoros|
@@ -189,7 +191,7 @@ class PomodoroSystem
     unsorted_summary.sort {|a, b| b[1] <=> a[1]}
   end
 
-  # @return [Array].
+  # @return [Array]
   def show_me_greater_amount_of_pomodoros_interrupted_on_last_7_days
     unsorted_summary = []
     @all_pomodoros.each_pair do |project, pomodoros|
@@ -206,7 +208,7 @@ class PomodoroSystem
     unsorted_summary.sort {|a, b| b[1] <=> a[1]}
   end
 
-  # @return [Array].
+  # @return [Array]
   def show_me_greater_amount_of_consecutive_pomodoros_completed_on_last_7_days
     unsorted_summary = []
     @all_pomodoros.each_pair do |project, pomodoros|
@@ -223,7 +225,7 @@ class PomodoroSystem
     unsorted_summary.sort {|a, b| b[1] <=> a[1]}
   end
 
-  # @return [Array].
+  # @return [Array]
   def show_me_greater_amount_of_pomodoros_completed_ever
     unsorted_summary = []
     @all_pomodoros.each_pair do |project, pomodoros|
@@ -240,7 +242,7 @@ class PomodoroSystem
     unsorted_summary.sort {|a, b| b[1] <=> a[1]}
   end
 
-  # @return [Array].
+  # @return [Array]
   def show_me_greater_amount_of_pomodoros_interrupted_ever
     unsorted_summary = []
     @all_pomodoros.each_pair do |project, pomodoros|
@@ -257,7 +259,7 @@ class PomodoroSystem
     unsorted_summary.sort {|a, b| b[1] <=> a[1]}
   end
 
-  # @return [Array].
+  # @return [Array]
   def show_me_greater_amount_of_consecutive_pomodoros_completed_ever
     unsorted_summary = []
     @all_pomodoros.each_pair do |project, pomodoros|
@@ -274,7 +276,7 @@ class PomodoroSystem
     unsorted_summary.sort {|a, b| b[1] <=> a[1]}
   end
 
-  # @return [NilClass or Array].
+  # @return [NilClass, Array]
   def show_me_pomodoros_finished_on_last_twelve_weeks(project)
     if(@all_pomodoros.has_key?(project.to_sym))
       to_return = [] #: Array of Pomodoro
@@ -290,7 +292,7 @@ class PomodoroSystem
     end
   end
 
-  # @return [NilClass or Array].
+  # @return [NilClass, Array]
   def show_me_pomodoros_stopped_on_last_twelve_weeks(project)
     if(@all_pomodoros.has_key?(project.to_sym))
       to_return = [] #: Array of Pomodoro
@@ -306,7 +308,7 @@ class PomodoroSystem
     end
   end
 
-  # @return [NilClass or Array].
+  # @return [NilClass, Array]
   def show_me_consecutive_pomodoros_finished_on_last_twelve_weeks(project)
     if(@all_pomodoros.has_key?(project.to_sym))
       to_return = [] #: Array of Pomodoro
@@ -324,7 +326,8 @@ class PomodoroSystem
 
   private
 
-  # @param persisted_data [Array]. If there's some persisted data, load it into self.
+  # @param persisted_data [Array]
+  # If there's some persisted data, load it into self.
   def load_persisted_data(persisted_data)
     @pomodoros_finished = persisted_data[0]
     @pomodoros_stopped = persisted_data[1]
@@ -350,7 +353,7 @@ class PomodoroSystem
     @current_project = nil
   end
 
-  # @return [TrueClass or FalseClass].
+  # @return [TrueClass, FalseClass]
   def is_next_pomodoro_going_to_be_consecutive?
     if(@current_break)
       start_time_of_last_break = @current_break.start_time #: Time
