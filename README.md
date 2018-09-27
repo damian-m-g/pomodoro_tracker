@@ -10,7 +10,7 @@ The difference between **[JorobusLab](http://jorobuslab.net)'s Pomodoro Tracker*
 
 ## Where can I download its lastest version?  
   
-[:arrow_down:](chrome-extension://bigefpfhnfcobdlfbedofhhaibnlghod/mega/secure.html#!e8tS0RCa!b4zj5JY7Fn6OBdXy07LslEQ7Gz2ZNWxk-Qrye8wBWUU)  
+[:arrow_down:](https://mega.nz/#!e8tS0RCa!b4zj5JY7Fn6OBdXy07LslEQ7Gz2ZNWxk-Qrye8wBWUU)  
   
 ## Where can I report bugs and request new features?  
    
