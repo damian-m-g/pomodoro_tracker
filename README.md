@@ -7,8 +7,7 @@ Many people who work at the computer, having certain focus, usually loses track 
 **Pomodoro Tracker** uses the [**Pomodoro**](https://en.wikipedia.org/wiki/Pomodoro_Technique) technique that suggests focused lapses of 25 minutes, with 5 minutes of resting in between and a long break of 15 minutes between each fourth Pomodoro. The **Pomodoro** philosophy indicates that during the course of a **Pomodoro** (focused lapse of 25 minutes) couldn't be place for distraction, it's necessary to consciously move on, towards producing a final result, premeditated, that may become at the end of the **Pomodoro** or by concatenating several of them. The rest periods should also be respected, during them it's suggested to revitalize body and mind.  
   
 The difference between **[JorobusLab](http://jorobuslab.net)'s Pomodoro Tracker** and others is that adds interesting extra features, such as the persistence of data related to pomodoros finished through time attached to certain projects, integration with the cloud via **DropBox**, integration with **Arduino** and a **Gamification** system!
-  
-    
+
 ![Pomodoro Tracker](http://jorobuslab.net/data/pomodoro_tracker.png)
 
 ## Where can I download its lastest version?  
