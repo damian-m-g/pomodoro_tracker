@@ -8,6 +8,8 @@ Many people who work at the computer, having certain focus, usually loses track 
   
 The difference between **[JorobusLab](http://jorobuslab.net)'s Pomodoro Tracker** and others is that adds interesting extra features, such as the persistence of data related to pomodoros finished through time attached to certain projects, integration with the cloud via **DropBox**, integration with **Arduino** and a **Gamification** system!
 
+![Pomodoro Tracker](http://jorobuslab.net/data/pomodoro_tracker.png)
+
 ## Where can I download its lastest version?  
   
 [:arrow_down:](https://mega.nz/#!e8tS0RCa!b4zj5JY7Fn6OBdXy07LslEQ7Gz2ZNWxk-Qrye8wBWUU)  
