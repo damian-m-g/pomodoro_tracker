@@ -70,7 +70,7 @@ class PomodoroSystem
       @consecutive_pomodoros[:working_day] += 1
       @consecutive_pomodoros[:global] += 1
       # raise gold
-      @pomodoro_tracker.gamification.raise_gold(2)
+      @pomodoro_tracker.gamification.raise_gold(1.5)
     else
       # raise gold
       @pomodoro_tracker.gamification.raise_gold(1)

@@ -8,6 +8,7 @@ require 'fastimage'
 require 'date'
 require 'win32/clipboard'
 require 'win32/mutex'
+require 'win32/sound'
 
 # source code
 require_relative './pomodoro_tracker/v_fxgui'

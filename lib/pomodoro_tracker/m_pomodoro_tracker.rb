@@ -5,10 +5,9 @@ class PomodoroTracker
   PROGRAM_DATA_PATH = "#{ENV['ProgramData'] || ENV['ALLUSERSPROFILE']}".gsub('\\', '/')
   PROGRAM_DATA_PT_PATH = "#{PROGRAM_DATA_PATH}/Pomodoro Tracker"
   PERSISTED_DATA_FILENAME = 'pd.pt'
-  VERSION = '1.0'
-  BUG_REPORTS_AND_FEATURES_REQUEST_URI = 'https://github.com/IgorJorobus/pomodoro_tracker/issues'
-  DONATIONS_URI = 'http://jorobuslab.net/main/en/pomodoro_tracker.html'
-  JOROBUSLAB_WEBSITE = 'http://jorobuslab.net'
+  VERSION = '1.3.1'
+  BUG_REPORTS_AND_FEATURES_REQUEST_URI = 'https://github.com/damian-m-g/pomodoro_tracker/issues'
+  JOROBUSLAB_WEBSITE = 'https://damian-m-g.github.io/'
 
   # *dropbox_present* is #TrueClass or #FalseClass
   # *arduino_connected* is #TrueClass or #FalseClass

@@ -17,13 +17,19 @@ end
 desc 'ocra --no-lzma(testing purpose)'
 task :ocra_no_lzma, :version do |t, args|
   args.with_defaults(:version => '')
-  system("ocra --chdir-first --no-lzma --icon './data/icon.ico' --output 'Pomodoro Tracker #{args[:version].!=('') ? "#{args[:version]}" : ''}.exe' './bin/pomodoro_tracker' './lib/**/*' './data/**/*.png' './ext/**/*'")
+  system("ocra --gemfile Gemfile --chdir-first --no-lzma  --gem-full --icon './data/icon.ico' --output 'releases/Pomodoro Tracker #{args[:version].!=('') ? "#{args[:version]}" : ''}.exe' './bin/pomodoro_tracker' './lib/**/*' './data/**/*.wav' './data/**/*.png' './ext/**/*'")
 end
 
 desc 'ocra'
 task :ocra, :version do |t, args|
   args.with_defaults(:version => '')
-  system("ocra --chdir-first --windows --icon './data/icon.ico' --output 'Pomodoro Tracker #{args[:version].!=('') ? "#{args[:version]}" : ''}.exe' './bin/pomodoro_tracker' './lib/**/*' './data/**/*.png' './ext/**/*'")
+  system("ocra --gemfile Gemfile --chdir-first --windows --gem-full --icon './data/icon.ico' --output 'releases/Pomodoro Tracker #{args[:version].!=('') ? "#{args[:version]}" : ''}.exe' './bin/pomodoro_tracker' './lib/**/*' './data/**/*.wav' './data/**/*.png' './ext/**/*'")
+end
+
+desc 'ocra_with_window'
+task :ocra_with_window, :version do |t, args|
+  args.with_defaults(:version => '')
+  system("ocra --gemfile Gemfile --chdir-first --gem-full --icon './data/icon.ico' --output 'releases/Pomodoro Tracker #{args[:version].!=('') ? "#{args[:version]}" : ''}.exe' './bin/pomodoro_tracker' './lib/**/*' './data/**/*.wav' './data/**/*.png' './ext/**/*'")
 end
 
 desc 'erase persisted data'

@@ -11,7 +11,7 @@ class ArduinoInterpreter
     @sp = Serial.new(serial_port)
     puts("#{serial_port} opened.")
     true
-  rescue RubySerial::Exception
+  rescue RubySerial::Error
     # there is nothing connected on *serial_port*
     puts("#{serial_port} not opened.")
     false

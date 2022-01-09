@@ -1,6 +1,8 @@
 # Graphic User Interface.
 class FXGUI
 
+  BELL_SOUND_PATH = "#{File.dirname(File.dirname(File.dirname(__FILE__ )))}/data/bell.wav"
+
   # @param persisted_data [Array, NilClass]
   # @param pomodoro_tracker [PomodoroTracker]
   def initialize(persisted_data, pomodoro_tracker)
@@ -213,7 +215,7 @@ class FXGUI
         @main_window.update()
         @main_window.repaint()
         # put window on front
-        AutoItFFI::AutoIt.win_activate(@main_window.title)
+        AutoItFFI::AutoIt.win_activate(@main_window.title) if defined?(AutoItFFI)
         @tabbook.setCurrent(0, true)
         # update GUI
         @main_window.create()
@@ -225,6 +227,8 @@ class FXGUI
           @main_window.update()
           @main_window.repaint()
         end
+        # play sound
+        Win32::Sound.play(BELL_SOUND_PATH)
         # start animation
         start_pomodoro_finished_animation()
         # update GUI
@@ -255,7 +259,7 @@ class FXGUI
             @main_window.repaint()
             # put window on front
             @tabbook.setCurrent(0, true)
-            AutoItFFI::AutoIt.win_activate(@main_window.title)
+            AutoItFFI::AutoIt.win_activate(@main_window.title) if defined?(AutoItFFI)
             @tabbook.setCurrent(0, true)
             # update GUI
             @main_window.create()
@@ -267,6 +271,8 @@ class FXGUI
               @main_window.update()
               @main_window.repaint()
             end
+            # play sound
+            Win32::Sound.play(BELL_SOUND_PATH)
             # start animation
             start_break_finished_animation()
             # update labels on gbs
@@ -305,62 +311,62 @@ class FXGUI
   # Holds the entire system for a few seconds while an animation is performed on the seven segments.
   def start_pomodoro_finished_animation
     @app.beginWaitCursor()
-      sleep(0.75)
-      @seven_segment.text = '  :  '
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      @seven_segment.text = '25:00'
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      @seven_segment.text = '  :  '
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      @seven_segment.text = '25:00'
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      @seven_segment.text = '  :  '
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      # break begins
-      @seven_segment.text = '00:00'
-      @main_window.update()
-      @main_window.repaint()
+    sleep(0.75)
+    @seven_segment.text = '  :  '
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = '25:00'
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = '  :  '
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = '25:00'
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = '  :  '
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    # break begins
+    @seven_segment.text = '00:00'
+    @main_window.update()
+    @main_window.repaint()
     @app.endWaitCursor()
   end
 
   def start_break_finished_animation
     long_break = @pomodoro_system.current_break.long #: TrueClass or FalseClass
     @app.beginWaitCursor()
-      sleep(0.75)
-      @seven_segment.text = '  :  '
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      @seven_segment.text = (long_break ? '15:00' : '05:00')
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      @seven_segment.text = '  :  '
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      @seven_segment.text = (long_break ? '15:00' : '05:00')
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      @seven_segment.text = '  :  '
-      @seven_segment.update()
-      @seven_segment.repaint()
-      sleep(0.75)
-      # break begins
-      @seven_segment.text = '00:00'
-      @seven_segment.update()
-      @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = '  :  '
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = (long_break ? '15:00' : '05:00')
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = '  :  '
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = (long_break ? '15:00' : '05:00')
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    @seven_segment.text = '  :  '
+    @seven_segment.update()
+    @seven_segment.repaint()
+    sleep(0.75)
+    # break begins
+    @seven_segment.text = '00:00'
+    @seven_segment.update()
+    @seven_segment.repaint()
     @app.endWaitCursor()
   end
 
@@ -546,7 +552,7 @@ class FXGUI
     # icon = FXPNGIcon.new(@app, File.read('./data/coin.png', {mode: 'rb'}), 0, IMAGE_ALPHAGUESS, 40, 42)
     icon = FXPNGIcon.new(@app, File.read('./data/vault.png', {mode: 'rb'}), 0, IMAGE_ALPHAGUESS, 42, 42)
     @label_coins_on_counter = FXLabel.new(parent, '', icon, opts: LABEL_NORMAL|LAYOUT_FILL)
-    @label_coins_on_counter.tipText = 'Accumulated coins'
+    @label_coins_on_counter.tipText = "Accumulated coins. You obtain 1 coin per pomodoro finished, 1.5 if it's consecutive (started within the minute of a break's end). You get -1 coin to interrupt a pomodoro."
     fill_coins_amount_on_counter_tab()
     FXPainter.paint_background(FXColor::VERDE, @label_coins_on_counter)
   end
@@ -1249,26 +1255,20 @@ class FXGUI
 =end
 
   def create_tab_about(parent)
-    vertical0 = FXVerticalFrame.new(parent, opts: LAYOUT_CENTER_X|LAYOUT_CENTER_Y)
-    l0 = FXLabel.new(vertical0, "Version #{PomodoroTracker::VERSION}", opts: LABEL_NORMAL|LAYOUT_CENTER_X)
+    vertical0 = FXVerticalFrame.new(parent, opts: LAYOUT_CENTER_X|LAYOUT_CENTER_Y, padTop: 0)
+    l0 = FXLabel.new(vertical0, "Version #{PomodoroTracker::VERSION}", opts: LABEL_NORMAL|LAYOUT_CENTER_X, padTop: 0)
     l0.font = big_font = FXFont.new(@app, 'Segoe UI,100,Bold,Straight')
     horizontal0 = FXHorizontalFrame.new(vertical0, padding: 0, padTop: 10, opts: LAYOUT_CENTER_X, hSpacing: 0)
-    l1 = FXLabel.new(horizontal0, "\u{1 f 4 1e} Bug report && feature requests:", padRight: 0)
+    l1 = FXLabel.new(horizontal0, "Bug report && feature requests: ", padRight: 0)
     l1.tipText = 'Label "bug" to point a bug, and "enhancement" to point a feature request'
     l2 = FXLabel.new(horizontal0, PomodoroTracker::BUG_REPORTS_AND_FEATURES_REQUEST_URI, padLeft: 0)
     l2.textColor = blue_link_color = FXRGB(34, 52, 83)
     copy_s = 'Left click to copy on clipboard'
     l2.tipText = copy_s
     l2.connect(SEL_LEFTBUTTONPRESS) {|sender, selector, data| Win32::Clipboard.set_data(sender.text)}
-    horizontal1 = FXHorizontalFrame.new(vertical0, padding: 0, opts: LAYOUT_CENTER_X)
-    l3 = FXLabel.new(horizontal1, "\u2764 To donate:")
-    l4 = FXLabel.new(horizontal1, PomodoroTracker::DONATIONS_URI)
-    l4.textColor = blue_link_color
-    l4.tipText = copy_s
-    l4.connect(SEL_LEFTBUTTONPRESS) {|sender, selector, data| Win32::Clipboard.set_data(sender.text)}
     horizontal2 = FXHorizontalFrame.new(vertical0, padding: 0, padTop: 10, opts: LAYOUT_CENTER_X, hSpacing: 0)
     l5 = FXLabel.new(horizontal2, 'Developed by ', padRight: 0, opts: JUSTIFY_CENTER_Y|LAYOUT_CENTER_Y|LAYOUT_FILL_Y)
-    l6 = FXLabel.new(horizontal2, 'JorobusLab', padTop: 0)
+    l6 = FXLabel.new(horizontal2, 'DMG', padTop: 0)
     l6.textColor = FXRGB(150, 0, 0)
     l6.font = big_font
     horizontal3 = FXHorizontalFrame.new(vertical0, padding: 0, opts: LAYOUT_CENTER_X)

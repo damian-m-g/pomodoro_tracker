@@ -11,9 +11,12 @@ module AutoItFFI
     AU3_INTDEFAULT = -2147483647
     # Used when constructing strings consumed by AutoIt
     UTF_16LE_NULL = "\0".encode("UTF-16LE")
-
+    PLATFORM_X64 = RUBY_PLATFORM.match(/64/) ? true : false
+    
     extend FFI::Library
-    ffi_lib File.expand_path(File.dirname(__FILE__)) + "/AutoItX3.dll"
+    dll_path = File.expand_path(File.dirname(__FILE__))
+    dll_path << (PLATFORM_X64 ? "/AutoItX3_x64.dll" : "/AutoItX3.dll")
+    ffi_lib dll_path
     ffi_convention :stdcall
 
     FunctionAttacher.attach(self)

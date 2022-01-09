@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 
 group :development do
   gem 'rake'
-  gem 'rdoc'
   gem 'bundler'
+  gem 'ocra'
 end
 
 group :production do
@@ -14,4 +14,6 @@ group :production do
   gem 'fastimage'
   gem 'win32-clipboard'
   gem 'win32-mutex'
+  gem 'win32-sound'
+  gem 'mini_portile2'
 end

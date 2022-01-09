@@ -33,9 +33,15 @@ module AutoItFFI
     # See "doc/Function Prototypes (C).txt" for the C header file.
     #
     def self.attach(lib)
-      FUNCTION_PROTOTYPES.each { |fun| lib.attach_function *fun }
+      FUNCTION_PROTOTYPES.each do |fun|
+        begin
+          lib.attach_function *fun
+        # don't do this at home kids
+        rescue Exception
+          next
+        end
+      end
     end
-
   end
 end
 
